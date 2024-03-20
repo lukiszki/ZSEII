@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <title>ZSEII - Poradniki, Ubuntu, Windows serwer, Skrętki</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="ZSEII - Poradniki, Ubuntu, Windows serwer, Skrętki">
+        <meta name="keywords" content="ZSEII, Poradniki, Ubuntu, Windows serwer, Skrętki, Technik informatyk">
+        <meta name="author" content="Mechanik">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="../../style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--[if IE]>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="top-header">
+            <a href = "index.html"><h1 class="logo">ZSEII</h1></a>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="../../index.html">Strona główna</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="#">Aplikacje</a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="../../allTutorials.html">Poradniki</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="#">Przydatne linki</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="../../gallery.html">Galeria</a>
+                    </li>
+                  </ul>
+                </div>
+                </nav>
+        </header>
+        <main>
+            <article class="container article">
+                <header>
+                    <h1>Połączenie dwóch komputerów poprzez routery</h1>
+                    <p>20.03.2024 20:00 | Autor: Mateusz Trypuć</p>
+                </header>
+                <section>
+                    <p>W pierwszym kroku z paska należy wstawić trzy routery o oznaczeniu “1941” oraz dwa zwykłe PC</p>
+                    <img src="img/image11.jpg" alt="Routery i komputery" class="article-img">
+                    <p>Następnie należy wybrać kabel krosowy który się nazywa ”Copper Cross-Over"</p>
+                    <img src="img/image2.jpg" alt="Kabel krosowy" class="article-img">
+                    <p>Teraz należy podłączyć go do PC do portu “FastEthernet0” oraz w routerze do portu “GigabitEthernet0/0” </p>
+                    <img src="img/image3.jpg" alt="Podłączenie kabla" class="article-img">
+                    <img src="img/image4.jpg" alt="Podłączenie kabla" class="article-img">
+                    <p>Tak samo robimy z drugim PC i routerem</p>
+
+                    <p>Po tych krokach tak powinno się prezentować połączenie </p>
+
+                    <img src="img/image12.jpg" alt="Połączenie" class="article-img">
+                    <p>Taką samą operację wykonujemy na routerze obok</p>
+                    <p>Kolejnym krokiem będzie przypisanie adresu IP, bramy i maski komputerom, w tym celu należy kliknąć na PC, przejść do zakładki Desktop i kliknąć w okienko podpisane jako “IP Configuration” a następnie przypisać adres ip w moim przypadku będzie to 10.10.10.10, Maska 255.255.255.0 i brama 10.10.10.1 </p>
+                    <img src="img/image6.jpg" alt="Przypisanie adresu IP" class="article-img">
+                    <p>W drugim komputerze należy zrobić to samo tylko że z adresem ip 20.20.20.20 maską 255.255.255.0 i bramą 20.20.20.1, jest to przykładowy adres można użyć innego byle nie kolidował </p>
+                    <p>Teraz należy kliknąć w router przejść do zakładki Physical i go wyłączyć w celu zamontowanie modułu HWIC-2T, aby wyłączyć router należy kliknąć wyłącznik a aby zamontować moduł należy okienko HWIC-2T przeciągnąć do wolnego slotu </p>
+                    <img src="img/image7.jpg" alt="Wyłączenie routera" class="article-img">
+                    <img src="img/image8.jpg" alt="Zamontowanie modułu" class="article-img">
+                    
+                    <p>Teraz należy tą czynność przeprowadzić na drugim  i trzecim routerze po czym je włączyć i odczekać kilka sekund w celu uruchomienia</p>
+                    <p>Teraz należy wybrać kabel DCE w celu połączenia routerów</p>
+                    <img src="img/image9.jpg" alt="Kabel DCE" class="article-img">
+                    <p>Po kliknięciu i nakierowaniu na router należy wybrać port nazwany “Serial0/1/0” albo “Serial0/1/1” oraz tak samo w drugim i trzecim routerze</p>
+                    <img src="img/imagea.jpg" alt="Podłączenie kabla" class="article-img">
+                    <p>Teraz należy kliknąć w Router następnie przejść do zakładki Config oraz przejść do opcji konfiguracyjnej portu GigabitEthernet0/0 i w przypisie Port Status kliknąć w okienko w celu włączenia portu a następnie ustawić IP i maskę w moim przypadku jest to 10.10.10.1 i maska 255.255.255.0 w routerze obok 20.20.20.1 i maska taka sama </p>
+                    <img src="img/imageb.jpg" alt="Konfiguracja portu" class="article-img">
+                    <p>Kolejnym krokiem będzie przejście do zakładki “Serial 0/1/0” oraz “Serial 0/1/1”w routerze w wydminach w celu włączenia portów i przypisania IP i maski w moim przypadku będzie to 30.30.30.1 dla portu 0/1/0 i 40.40.40.1 dla 0/1/1  i maska 255.255.255.0 którą zastosuje w pozostałych konfiguracjach. Dla routeru Lunapark nadaje ip dla portu 0/1/0- 40.40.40.2 oraz dla 0/1/1- 50.50.50.1, Oraz dla routeru w Choroszczy nadaje dla portu 0/1/0 30.30.30.2 oraz dla 0/1/1 50.50.50.2 </p>
+                    <img src="img/image13.jpg" alt="Konfiguracja portu" class="article-img">
+                    <p>W ostatnim kroku klikamy w router w zakładce Config przechodzimy do zakładki RIP i dodajemy adresy IP przyległych sieci czyli w przypadku lewego routera dodajemy tam adres IP lewego komputera czyli 10.10.10.10 oraz adres IP portu Serial0/1/0 czyli 30.30.30.1 oraz portu 0/1/1/ czyli 40.40.40.1, tak samo robimy dla reszty routerów w przypadku routeru w Choroszczy będzie to 30.30.30.2 i 50.50.50.2 a w Lunaparku to 40.40.40.2, 50.50.50.1 oraz 20.20.20.20</span> </p>
+                    <p><span class="important-text">UWAGA jest to normalne że jeśli wpiszesz np 40.40.40.2 to tylko pierwszy oktet będzie miał 15 a reszta będzie wypełniona zerami </p>
+                    <p>W celu sprawdzenia czy wszystko działa należy kliknąć w lewy komputer w zakładce Desktop wybrać okienko podpisane jako “Command Prompt” i wpisać polecenie ping 20.20.20.20 czyli ip prawego komputera można też zrobić to na odwrót </p>
+                    <img src="img/imagef.jpg" alt="Pingowanie" class="article-img">
+                    <p>Jak można zauważyć wszystko działa</p>
+                    <p><span class="important-text">UWAGA jest to normalne że pierwszy ping może przepaść</span>
+                </section>    
+                <section>
+                    <header>
+                        <h2>Ustalanie trasy dla pakietu</h2>
+                    </header>
+                    <p>Zakładam że bezpośrednia trasa dla pakietu przez Wydminy-Lunapark będzie zbyt niebezpieczna więc chce pakiet przesłać jeszcze przez Choroszcz przy użyciu protokołu RIP wybierze on trasę składającą się z najmniejszej ilośći przeskoków w tym celu klikam na router w Wydminach i przechodzę do zakładki Static </p>
+                    <img src="img/image15.jpg" alt="Konfiguracja wydmin" class="article-img">
+                    <p>W polu Network wpisuję miejsce docelowe dla pakietu u mnie będzie to 20.20.20.0 czyli adres ip komputera w Sucholaskach z 0 na końcu maskę 24 bitową oraz Next hop oznacza następny przeskok i tam należy wprowadzić adres ip urządzenia które prześle dalej pakiet u mnie to jest router w Choroszczy i posiada ip 30.30.30.2  </p>
+                    <p><span class="important-text">W polu Network wpisuję miejsce docelowe dla pakietu u mnie będzie to 20.20.20.0 czyli adres ip komputera w Sucholaskach z 0 na końcu maskę 24 bitową oraz Next hop oznacza następny przeskok i tam należy wprowadzić adres ip urządzenia które prześle dalej pakiet u mnie to jest router w Choroszczy i posiada ip 30.30.30.2 </span></p>
+                    <img src="img/image16.jpg" alt="Konfiguracja static routes" class="article-img">
+                    <p>W routerze w Choroszczy Network: 20.20.20.20 maskę /24 i Next hop 50.50.50.1 </p>
+                    <img src="img/image17.jpg" alt="konfiguracja static routes" class="article-img">
+                    <p>W routerze w Lunaparku Network daję na 10.10.10.10 czyli adres ip komputera w Giżycku lecz z zerem na końcu, maska /24 oraz Next hop 50.50.50.2 czyli adres routera w Choroszczy </p>
+                    <img src="img/image18.jpg" alt="konfiguracja static routes" class="article-img">
+                    <p>W ostatnim kroku przechodzimy do routera w Choroszczy i Network daje na 10.10.10.0 maska /24 oraz 30.30.30.1 czyli adres routera w Wydminach </p>
+                    <img src="img/image19.jpg" alt="konfiguracja static routes" class="article-img">
+                    <p>Teraz w wierszu poleceń wpisujemy komendę “tracert” i adres ip komputera w Sucholaskach czyli 20.20.20.20 </p>
+                    <img src="img/image1a.jpg" alt="tracert" class="article-img">
+                    <p>Jak widać wszystko elegancko chodzi</p>
+                    <h2>Po robocie</h2>
+                </section>
+                <p><a href="../../allTutorials.html">Powrót do poradników</a></p>
+                <p><a href="../../index.html">Powrót do strony głównej</a></p>
+            </article>
+        </main>
+        <footer>
+            <p>Pozdrawiam</p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    </body>
+</html>
