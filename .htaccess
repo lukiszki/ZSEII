@@ -1,0 +1,14 @@
+### PROTECT FILES ###
+<FilesMatch "\.(htaccess|htpasswd|ini|fla|psd|log|sh)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+ErrorDocument 404 /404.html
+RewriteEngine On
+RewriteRule strona-glowna index.html
+RewriteRule wszystkie-poradniki allTutorials.html
+RewriteRule galeria gallery.html
+RewriteRule poradniki-ubuntu-serwer tutorials1.html
+RewriteRule poradniki-eksploatacja-urzadzen-peryferyjnych-i-sieciowych tutorials2.html
+RewriteRule polaczenie-dwoch-komputerow-cisco-packet-tracer /articles/cisco1/cisco1.html

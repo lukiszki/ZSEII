@@ -52,16 +52,19 @@ p
 .tutorial-container
 {
     height: 300px;
-    margin-bottom: 25px
+    margin-bottom: 25px;
 }
 article img
 {
     overflow: hidden;
-    object-fit: cover;
+    object-fit:fill;
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
+    background-color: #000000;
+    border-radius: 6px;
+
 }
 .card-img-top
 {
@@ -74,6 +77,7 @@ article img
     position: relative;
     width: 100%;
     height: 100%;
+
 }
 .tutorial-text
 {
@@ -219,4 +223,78 @@ article>ul>li>ol>li
     pointer-events: none;
     cursor: default;
     color: #6c757d;
+}
+form
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form>button
+{
+    width: 200px;
+    margin: 10px;
+}
+form>textarea
+{
+    width: 200px;
+    margin: 10px;
+}
+#messages
+{
+  display:flex;
+  flex-direction: column;
+}
+.user
+{
+  align-self: end;
+  background-color: #535bf2;
+  padding: 10px;
+  border-radius: 10px;
+  margin:  10px 0;
+  max-width: 50%;
+
+}
+.assistant
+{
+  align-self: start;
+  background-color: #363636;
+  padding: 10px;
+  border-radius: 10px;
+  margin:  10px 0;
+  max-width: 50%;
+}
+
+
+button
+ {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    background-color: #1f1f1f;
+    color: #d3bdf3;
+
+  }
+  button:hover {
+    border-color: #525af6;
+  }
+  button:focus,
+  button:focus-visible 
+  {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  .brain-emoji {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

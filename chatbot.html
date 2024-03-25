@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <title>ZSEII - Poradniki, Ubuntu, Windows serwer, Skrętki</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="ZSEII - Poradniki, Ubuntu, Windows serwer, Skrętki">
+        <meta name="keywords" content="ZSEII, Poradniki, Ubuntu, Windows serwer, Skrętki, Technik informatyk">
+        <meta name="author" content="Mechanik">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--[if IE]>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    
+    </head>
+    <body>
+        <header class="top-header">
+            <a href = "index.html"><h1 class="logo">ZSEII</h1></a>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="index.html">Strona główna</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="#">Aplikacje</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="allTutorials.html">Poradniki</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="#">Przydatne linki</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="gallery.html">Galeria</a>
+                    </li>
+                  </ul>
+                </div>
+                </nav>
+        </header>
+        <main>
+            <article>
+                <header>
+                  <h1>ChatBOT</h1>
+                  <img style="width: 200px; margin: 20px;" src="img/powered-by-openai-badge-filled-on-dark.svg" alt="Powered by OpenAI">
+                  <p>Witamy na naszej stronie, gdzie możesz korzystać z zaawansowanego chatbota, który wykorzystuje technologię OpenAI! Nasz chatbot jest zasilany przez najnowsze modele AI od OpenAI, oferując intuicyjne i inteligentne rozmowy. Pamiętaj, że nasz bot używa technologii OpenAI, ale nie jest bezpośrednim produktem czy usługą OpenAI.</p>
+                </header>
+
+                <div id="messages">
+        
+                </div>
+                <form>
+                  <label for="prompt">Wpisz tutaj ten tekst</label>
+                  <textarea name="prompt"></textarea>
+                  <button id="przycisk" type="submit">Wyślij</button>
+                </form>
+                <button id="wyczyść">Wyczyść historie</button>
+                  
+                  <p>Pozostało Ci jeszcze: <span id="messages_left"></span> wiadomości</p>
+                
+              </main>
+              <script>
+                
+
+const form = document.querySelector('form');
+
+let messages = JSON.parse(localStorage.getItem('messages')) || [];
+let storedData = localStorage.getItem('messages_left');
+if(storedData == null || storedData === undefined) {
+  let data = {messages_left: 10, date: new Date().toLocaleDateString()};
+  localStorage.setItem('messages_left', JSON.stringify(data));
+} else {
+  let parsedData = JSON.parse(storedData);
+  if(parsedData.date != new Date().toLocaleDateString()) {
+    let data = {messages_left: 10, date: new Date().toLocaleDateString()};
+    localStorage.setItem('messages_left', JSON.stringify(data));
+  }
+}
+if(localStorage.getItem('i')>=3)
+{
+  blockWebsite();
+}
+if(localStorage.getItem('messages_left')<=0)
+  {
+    document.querySelector('form').style = 'display:none';
+    document.querySelector('#messages_left').innerHTML = 'wyczerpałeś limit wiadomości na dzień dzisiejszy data: ';
+  }
+  else
+  {
+    document.querySelector('#messages_left').innerHTML = localStorage.getItem('messages_left');
+  
+  }
+updateHtml();
+
+document.querySelector('#wyczyść').addEventListener('click', () => {
+  localStorage.removeItem('messages');
+  messages = [];
+  updateHtml();
+})
+
+async function getGptResponse(prompt)
+{
+  messages.push({
+    "role": "user",
+    "content":`{
+    "content": "${prompt}",
+    "flagged": false
+}`,
+  });
+  updateHtml();
+  blockButton();
+
+  const response = await fetch('http://localhost:8080/gpt',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      messages
+    })
+  })
+  const apiResponse = await response.json();
+  return apiResponse.choices[0].message;
+}
+
+form.addEventListener('submit',async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  if(JSON.parse(localStorage.getItem('messages_left')).messages_left<=0)
+  {
+    document.querySelector('form').style = 'display:none';
+    document.querySelector('messages_left').innerHTML = 'wyczerpałeś limit wiadomości na dzień dzisiejszy data: '+new Date().toLocaleDateString();
+  }
+  
+  const response = await getGptResponse(data.get('prompt'));
+  messages.push(response);
+  localStorage.setItem('messages', JSON.stringify(messages));
+  const messages_left = JSON.parse(localStorage.getItem('messages_left')).messages_left;
+  let dataa = {messages_left: messages_left-1, date: new Date().toLocaleDateString()};
+  localStorage.setItem('messages_left', JSON.stringify(dataa));
+  
+  console.log(response.content);
+  const mess = JSON.parse(response.content);
+  if (mess.flagged == true)
+  {
+    console.log('usunięto!');
+    let button = document.querySelector('#przycisk'); // Znajdź przycisk
+    
+    let i = localStorage.getItem('i');
+
+    if (i==null)
+    {
+      i = 1;
+    }
+    else
+    {
+      i++;
+    }if(i<3)
+    {
+      localStorage.setItem('i',i);
+      button.innerHTML = 'To jest twoje '+i+' ostrzeżenie';
+    }
+    
+    else
+    {
+      localStorage.setItem('i',i);
+      
+
+      button.innerHTML = 'Zostałeś zablokowany';
+      button.disabled = true;
+      document.querySelector('.logo').style = 'color:red';
+      document.querySelector('.logo').innerHTML += '<span class="evil-emoji">😈</span>';
+      localStorage.removeItem('messages');
+    }
+  }
+ 
+  updateHtml();
+  unlockButton();
+
+} )
+function blockWebsite()
+{
+  document.querySelector('article').innerHTML = '<h1>Naruszyłeś nasze przepisy, zostałeś zablokowany</h1>';
+  document.querySelector('.logo').style = 'color:red';
+document.querySelector('.logo').innerHTML += '<span class="evil-emoji">😈</span>';
+}
+function updateHtml() {
+  let html = '';
+  for(let i = 0; i< messages.length; i++) {
+    let content = JSON.parse(messages[i].content.replace(/[\n\r]/g, ' ')).content;
+    html += `<div class="${messages[i].role}">${content}</div>`
+  }
+  const div = document.querySelector('#messages');
+  div.innerHTML = html;
+  document.querySelector('#messages_left').innerHTML = JSON.parse(localStorage.getItem('messages_left')).messages_left;
+}
+function blockButton()
+{
+  const button = document.querySelector('button');
+  const textbox = document.querySelector('textarea');
+  const div = document.querySelector('#messages');
+  button.disabled = true;
+  div.innerHTML += '<div class="assistant">Thinking...<span class="brain-emoji">🧠</span> </div>';
+  textbox.value = '';
+}
+function unlockButton()
+{
+  const button = document.querySelector('button');
+  const textbox = document.querySelector('textarea');
+  const div = document.querySelector('#messages');
+  button.disabled = false;
+}
+
+
+              </script>
+                
+            </article>
+        </main>
+        <footer>
+            <p>Rozmowy nie są zapisywane na serwerze tylko w przeglądarce, Pozdrawiam</p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    </body>
+</html>
